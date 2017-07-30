@@ -101,4 +101,30 @@ describe('GET /todos/:id', () => {
     });
 });
 
+describe('Delete /todos/:id', () => {
+    it('should delete todo for id', (done) => {
+        request(app)
+            .delete(`/todos/${todos[0]._id}`)
+            .expect(200)
+            .expect((res) => {
+                expect(res.body.todo.task).toBe(todos[0].task)
+            })
+            .end(done);
+    });
+
+    it('should get 404 for invalid id', (done) => {
+        request(app)
+            .delete('/todos/1234')
+            .expect(404)
+            .end(done);
+    });
+
+    it('should get 404 status for no results matching the id', (done) => {
+        request(app)
+            .delete('/todos/597e6f70b306543254ba11be')
+            .expect(404)
+            .end(done);
+    });
+});
+
 });

@@ -104,7 +104,7 @@ describe('GET /todos/:id', () => {
 describe('Delete /todos/:id', () => {
     it('should delete todo for id', (done) => {
         request(app)
-            .delete(`/todos/${todos[0]._id}`)
+            .delete(`/todos/${todos[0]._id.toHexString()}`)
             .expect(200)
             .expect((res) => {
                 expect(res.body.todo.task).toBe(todos[0].task)

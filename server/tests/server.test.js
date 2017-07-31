@@ -7,10 +7,10 @@ const {Todo} = require('./../models/todo');
 
 const todos = [{
     _id : new ObjectID(),
-    task : 'first test todo'
+    task : 'first test todo 1'
 }, {
     _id : new ObjectID(),
-    task: 'second test todo',
+    task: 'second test todo 2',
     completedAt: 333
 }];
 
@@ -132,7 +132,7 @@ describe('PATCH /todos/:id', () => {
     it('should update todo for id', (done) => {
         request(app)
             .patch(`/todos/${todos[0]._id.toHexString()}`)
-            .send({completed: true})
+            .send({completed: true, task: 'new task'})
             .expect(200)
             .expect((res) => {
                 expect(res.body.todo.completed).toBe(true);
